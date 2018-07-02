@@ -11,6 +11,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+    public function getDetails() {
+        $details = [
+            'id' => $this->getId(),
+            'email' => $this->getEmail(),
+            'lastName' => $this->getLastName(),
+            'firstName' => $this->getFirstName(),
+            'celtName' => $this->getCeltName(),
+            'admin' => $this->getAdmin(),
+            'status' => $this->getStatus()
+        ];
+
+        return $details;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -58,10 +72,6 @@ class User
      */
     private $participations;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserSubject", mappedBy="user", orphanRemoval=true)
-     */
-    private $readSubjects;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ReadTopic", mappedBy="user", orphanRemoval=true)
@@ -71,7 +81,6 @@ class User
     public function __construct()
     {
         $this->participations = new ArrayCollection();
-        $this->readSubjects = new ArrayCollection();
         $this->readTopics = new ArrayCollection();
     }
 
@@ -189,37 +198,6 @@ class User
             // set the owning side to null (unless already changed)
             if ($participation->getUser() === $this) {
                 $participation->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|UserSubject[]
-     */
-    public function getReadSubjects(): Collection
-    {
-        return $this->readSubjects;
-    }
-
-    public function addReadSubject(UserSubject $readSubject): self
-    {
-        if (!$this->readSubjects->contains($readSubject)) {
-            $this->readSubjects[] = $readSubject;
-            $readSubject->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReadSubject(UserSubject $readSubject): self
-    {
-        if ($this->readSubjects->contains($readSubject)) {
-            $this->readSubjects->removeElement($readSubject);
-            // set the owning side to null (unless already changed)
-            if ($readSubject->getUser() === $this) {
-                $readSubject->setUser(null);
             }
         }
 

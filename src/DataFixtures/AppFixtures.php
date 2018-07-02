@@ -24,17 +24,17 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // Create users
-        $userNames = ["Avriel","Benji", "Colin", "Diederik"];
+        $userNames = ["Avriel", "Benji", "Colin", "Diederik"];
 
         foreach ($userNames as $name) {
             $u = new User();
-            $u->setCeltName($name+"ix");
+            $u->setCeltName($name . "ix");
             $u->setFirstName($name);
-            $u->setLastName($name+"on");
-            $u->setEmail(strtolower($name)+"@gmail.com");
+            $u->setLastName($name . "on");
+            $u->setEmail(strtolower($name) . "@gmail.com");
             $u->setAdmin(true);
             $u->setPassword("password");
-            $u->getStatus("a");
+            $u->setStatus("a");
             $manager->persist($u);
         }
 
