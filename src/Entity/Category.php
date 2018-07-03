@@ -11,6 +11,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+    public function getDetails() {
+        $details = [
+            'id' => $this->getId(),
+            'title' => $this->getTitle()
+        ];
+
+        return $details;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
