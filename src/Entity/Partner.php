@@ -9,6 +9,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Partner
 {
+    public function getDetails() {
+        $details = [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'link' => $this->getLink()
+        ];
+
+        return $details;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

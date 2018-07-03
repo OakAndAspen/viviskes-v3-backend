@@ -34,6 +34,12 @@ class UserController extends Controller
     {
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
+        if (!$user) {
+            return CustomFunctions::respondWithJSON([
+                'error' => 'No user found for id ' . $id
+            ]);
+        }
+
         return CustomFunctions::respondWithJSON($user->getDetails());
     }
 
