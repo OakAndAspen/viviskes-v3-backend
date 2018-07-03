@@ -11,6 +11,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Topic
 {
+    public function getDetails() {
+        $details = [
+            'id' => $this->getId(),
+            'user' => $this->getUser()->getId(),
+            'category' => $this->getCategory()->getId(),
+            'title' => $this->getTitle(),
+            'creationDate' => $this->getCreationDate()->format("Y-m-d H:i:s"),
+            'pinned' => $this->getPinned()
+        ];
+
+        return $details;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
