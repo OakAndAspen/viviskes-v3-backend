@@ -11,6 +11,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
+    public function getDetails() {
+        $details = [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'location' => $this->getLocation(),
+            'public' => $this->getPublic(),
+            'startDate' => $this->getStartDate(),
+            'endDate' => $this->getEndDate(),
+            'code' => $this->getCode(),
+            'description' => $this->getDescription()
+        ];
+
+        return $details;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
