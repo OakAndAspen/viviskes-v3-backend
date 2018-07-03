@@ -9,6 +9,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
+    public function getDetails() {
+        $details = [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'creationDate' => $this->getCreationDate()->format("Y-m-d H:i:s"),
+            'lastUpdate' => $this->getLastUpdate()->format("Y-m-d H:i:s"),
+            'content' => $this->getContent()
+        ];
+
+        return $details;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
